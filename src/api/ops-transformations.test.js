@@ -88,6 +88,12 @@ test('rotate (single item angle axis style)', t => {
   t.deepEqual(obs.properties.cube.center, {_x: 0.5266504075063266, _y: 0.5, _z: 0.47184674235753715})
 })
 
+test('rotate (single item angle axis style, array of zeros)', t => {
+  const op1 = cube()
+  const obs = rotate(Math.PI, [0, 0, 0], op1)
+  t.deepEqual(obs.properties.cube.center, {_x: 0.5, _y: 0.5, _z: 0.5})
+})
+
 test('rotate (multiple items, 2d)', t => {
   const op1 = square()
   const op2 = circle()
@@ -231,7 +237,7 @@ test('expand (single item)', t => {
   const op1 = cube()
   const obs = expand(10, 5, op1)
 
-  t.deepEqual(obs.polygons[0].vertices[0], {pos: {_x: -10, _y: 0, _z: 0}, tag: 25969})
+  t.deepEqual(obs.polygons[0].vertices[0].pos, {_x: -10, _y: 0, _z: 0})
 })
 
 test.failing('expand (multiple items)', t => {

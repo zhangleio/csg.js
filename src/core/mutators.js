@@ -44,6 +44,14 @@ const addTransformationMethodsToPrototype = function (prot) {
   }
 
   prot.rotate = function (rotationCenter, rotationAxis, degrees) {
+    if (rotationAxis) {
+      if (rotationAxis.length && rotationAxis.lenght === 3 && rotationAxis[0] === 0 && rotationAxis[1] === 0 && rotationAxis[2] === 0) {
+        return this.transform(Matrix4x4.translation([0, 0, 0]))// just a hack to return the original without change
+      }
+      if (rotationAxis.length && rotationAxis.lenght === 2 && rotationAxis[0] === 0 && rotationAxis[1] === 0) {
+        return this.transform(Matrix4x4.translation([0, 0, 0]))// just a hack to return the original without change
+      }
+    }
     return this.transform(Matrix4x4.rotation(rotationCenter, rotationAxis, degrees))
   }
 
